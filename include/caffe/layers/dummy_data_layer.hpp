@@ -2,6 +2,7 @@
 #define CAFFE_DUMMY_DATA_LAYER_HPP_
 
 #include <vector>
+#include <memory>
 
 #include "caffe/blob.hpp"
 #include "caffe/filler.hpp"
@@ -38,8 +39,8 @@ class DummyDataLayer : public Layer<Dtype> {
   virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
       const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom) {}
 
-  vector<shared_ptr<Filler<Dtype> > > fillers_;
-  vector<bool> refill_;
+  std::vector<std::shared_ptr<Filler<Dtype> > > fillers_;
+  std::vector<bool> refill_;
 };
 
 }  // namespace caffe

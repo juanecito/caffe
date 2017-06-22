@@ -120,7 +120,7 @@ class InfogainLossLayer : public LossLayer<Dtype> {
   virtual void sum_rows_of_H(const Blob<Dtype>* H);
 
   /// The internal SoftmaxLayer used to map predictions to a distribution.
-  shared_ptr<Layer<Dtype> > softmax_layer_;
+  std::shared_ptr<Layer<Dtype> > softmax_layer_;
   /// prob stores the output probability predictions from the SoftmaxLayer.
   Blob<Dtype> prob_;
   /// bottom vector holder used in call to the underlying SoftmaxLayer::Forward

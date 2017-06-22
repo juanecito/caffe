@@ -78,9 +78,9 @@ void SGDSolver<Dtype>::PreSolve() {
   temp_.clear();
   for (int i = 0; i < net_params.size(); ++i) {
     const vector<int>& shape = net_params[i]->shape();
-    history_.push_back(shared_ptr<Blob<Dtype> >(new Blob<Dtype>(shape)));
-    update_.push_back(shared_ptr<Blob<Dtype> >(new Blob<Dtype>(shape)));
-    temp_.push_back(shared_ptr<Blob<Dtype> >(new Blob<Dtype>(shape)));
+    history_.push_back(std::shared_ptr<Blob<Dtype> >(new Blob<Dtype>(shape)));
+    update_.push_back(std::shared_ptr<Blob<Dtype> >(new Blob<Dtype>(shape)));
+    temp_.push_back(std::shared_ptr<Blob<Dtype> >(new Blob<Dtype>(shape)));
   }
 }
 

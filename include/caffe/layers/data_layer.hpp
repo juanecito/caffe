@@ -2,6 +2,7 @@
 #define CAFFE_DATA_LAYER_HPP_
 
 #include <vector>
+#include <memory>
 
 #include "caffe/blob.hpp"
 #include "caffe/data_transformer.hpp"
@@ -30,8 +31,8 @@ class DataLayer : public BasePrefetchingDataLayer<Dtype> {
   bool Skip();
   virtual void load_batch(Batch<Dtype>* batch);
 
-  shared_ptr<db::DB> db_;
-  shared_ptr<db::Cursor> cursor_;
+  std::shared_ptr<db::DB> db_;
+  std::shared_ptr<db::Cursor> cursor_;
   uint64_t offset_;
 };
 

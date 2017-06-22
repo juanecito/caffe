@@ -1,7 +1,6 @@
 #ifndef CAFFE_COMMON_HPP_
 #define CAFFE_COMMON_HPP_
 
-#include <boost/shared_ptr.hpp>
 #include <gflags/gflags.h>
 #include <glog/logging.h>
 
@@ -15,6 +14,7 @@
 #include <string>
 #include <utility>  // pair
 #include <vector>
+#include <memory>
 
 #include "caffe/util/device_alternate.hpp"
 
@@ -74,10 +74,6 @@ namespace cv { class Mat; }
 
 namespace caffe {
 
-// We will use the boost shared_ptr instead of the new C++11 one mainly
-// because cuda does not work (at least now) well with C++11 features.
-using boost::shared_ptr;
-
 // Common functions and classes from std that caffe often uses.
 using std::fstream;
 using std::ios;
@@ -121,7 +117,7 @@ class Caffe {
     void* generator();
    private:
     class Generator;
-    shared_ptr<Generator> generator_;
+    std::shared_ptr<Generator> generator_;
   };
 
   // Getters for boost rng, curand, and cublas handles
@@ -172,7 +168,7 @@ class Caffe {
   cublasHandle_t cublas_handle_;
   curandGenerator_t curand_generator_;
 #endif
-  shared_ptr<RNG> random_generator_;
+  std::shared_ptr<RNG> random_generator_;
 
   Brew mode_;
 

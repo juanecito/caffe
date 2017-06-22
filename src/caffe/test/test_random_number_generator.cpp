@@ -198,10 +198,10 @@ class RandomNumberGeneratorTest : public ::testing::Test {
   size_t sample_size_;
   uint32_t seed_;
 
-  shared_ptr<SyncedMemory> data_;
-  shared_ptr<SyncedMemory> data_2_;
-  shared_ptr<SyncedMemory> int_data_;
-  shared_ptr<SyncedMemory> int_data_2_;
+  std::shared_ptr<SyncedMemory> data_;
+  std::shared_ptr<SyncedMemory> data_2_;
+  std::shared_ptr<SyncedMemory> int_data_;
+  std::shared_ptr<SyncedMemory> int_data_2_;
 };
 
 TYPED_TEST_CASE(RandomNumberGeneratorTest, TestDtypes);

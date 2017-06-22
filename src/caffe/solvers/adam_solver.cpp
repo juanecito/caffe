@@ -12,7 +12,7 @@ void AdamSolver<Dtype>::AdamPreSolve() {
   for (int i = 0; i < net_params.size(); ++i) {
     const vector<int>& shape = net_params[i]->shape();
     this->history_.push_back(
-            shared_ptr<Blob<Dtype> >(new Blob<Dtype>(shape)));
+            std::shared_ptr<Blob<Dtype> >(new Blob<Dtype>(shape)));
   }
 }
 

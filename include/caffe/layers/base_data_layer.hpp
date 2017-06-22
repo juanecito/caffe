@@ -2,6 +2,7 @@
 #define CAFFE_DATA_LAYERS_HPP_
 
 #include <vector>
+#include <memory>
 
 #include "caffe/blob.hpp"
 #include "caffe/data_transformer.hpp"
@@ -39,7 +40,7 @@ class BaseDataLayer : public Layer<Dtype> {
 
  protected:
   TransformationParameter transform_param_;
-  shared_ptr<DataTransformer<Dtype> > data_transformer_;
+  std::shared_ptr<DataTransformer<Dtype> > data_transformer_;
   bool output_labels_;
 };
 
@@ -69,7 +70,7 @@ class BasePrefetchingDataLayer :
   virtual void InternalThreadEntry();
   virtual void load_batch(Batch<Dtype>* batch) = 0;
 
-  vector<shared_ptr<Batch<Dtype> > > prefetch_;
+  std::vector<std::shared_ptr<Batch<Dtype> > > prefetch_;
   BlockingQueue<Batch<Dtype>*> prefetch_free_;
   BlockingQueue<Batch<Dtype>*> prefetch_full_;
   Batch<Dtype>* prefetch_current_;

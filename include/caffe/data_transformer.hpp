@@ -143,7 +143,7 @@ class DataTransformer {
   TransformationParameter param_;
 
 
-  shared_ptr<Caffe::RNG> rng_;
+  std::shared_ptr<Caffe::RNG> rng_;
   Phase phase_;
   Blob<Dtype> data_mean_;
   vector<Dtype> mean_values_;

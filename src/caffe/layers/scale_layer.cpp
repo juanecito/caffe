@@ -38,7 +38,7 @@ void ScaleLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom,
       filler_param.set_type("constant");
       filler_param.set_value(1);
     }
-    shared_ptr<Filler<Dtype> > filler(GetFiller<Dtype>(filler_param));
+    std::shared_ptr<Filler<Dtype> > filler(GetFiller<Dtype>(filler_param));
     filler->Fill(this->blobs_[0].get());
   }
   if (param.bias_term()) {

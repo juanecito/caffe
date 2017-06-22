@@ -112,7 +112,7 @@ void GradientChecker<Dtype>::CheckGradientSingle(Layer<Dtype>* layer,
   GetObjAndGradient(*layer, top, top_id, top_data_id);
   layer->Backward(top, propagate_down, bottom);
   // Store computed gradients for all checked blobs
-  vector<shared_ptr<Blob<Dtype> > >
+  vector<std::shared_ptr<Blob<Dtype> > >
       computed_gradient_blobs(blobs_to_check.size());
   for (int blob_id = 0; blob_id < blobs_to_check.size(); ++blob_id) {
     Blob<Dtype>* current_blob = blobs_to_check[blob_id];
@@ -219,7 +219,7 @@ void GradientChecker<Dtype>::CheckGradientEltwise(Layer<Dtype>* layer,
 template <typename Dtype>
 void GradientChecker<Dtype>::CheckGradientNet(
     const Net<Dtype>& net, const vector<Blob<Dtype>*>& input) {
-  const vector<shared_ptr<Layer<Dtype> > >& layers = net.layers();
+  const vector<std::shared_ptr<Layer<Dtype> > >& layers = net.layers();
   vector<vector<Blob<Dtype>*> >& bottom_vecs = net.bottom_vecs();
   vector<vector<Blob<Dtype>*> >& top_vecs = net.top_vecs();
   for (int i = 0; i < layers.size(); ++i) {

@@ -68,8 +68,8 @@ class Solver {
   void Snapshot();
   virtual ~Solver() {}
   inline const SolverParameter& param() const { return param_; }
-  inline shared_ptr<Net<Dtype> > net() { return net_; }
-  inline const vector<shared_ptr<Net<Dtype> > >& test_nets() {
+  inline std::shared_ptr<Net<Dtype> > net() { return net_; }
+  inline const vector<std::shared_ptr<Net<Dtype> > >& test_nets() {
     return test_nets_;
   }
   int iter() const { return iter_; }
@@ -113,8 +113,8 @@ class Solver {
   SolverParameter param_;
   int iter_;
   int current_step_;
-  shared_ptr<Net<Dtype> > net_;
-  vector<shared_ptr<Net<Dtype> > > test_nets_;
+  std::shared_ptr<Net<Dtype> > net_;
+  vector<std::shared_ptr<Net<Dtype> > > test_nets_;
   vector<Callback*> callbacks_;
   vector<Dtype> losses_;
   Dtype smoothed_loss_;
