@@ -25,7 +25,7 @@ void PReLULayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom,
     } else {
       this->blobs_[0].reset(new Blob<Dtype>(vector<int>(1, channels)));
     }
-    shared_ptr<Filler<Dtype> > filler;
+    std::shared_ptr<Filler<Dtype> > filler;
     if (prelu_param.has_filler()) {
       filler.reset(GetFiller<Dtype>(prelu_param.filler()));
     } else {

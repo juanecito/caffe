@@ -148,7 +148,7 @@ class RecurrentLayer : public Layer<Dtype> {
       const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
 
   /// @brief A Net to implement the Recurrent functionality.
-  shared_ptr<Net<Dtype> > unrolled_net_;
+  std::shared_ptr<Net<Dtype> > unrolled_net_;
 
   /// @brief The number of independent streams to process simultaneously.
   int N_;

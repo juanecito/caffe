@@ -66,14 +66,14 @@ static size_t total_size(const vector<Blob<Dtype>*>& params) {
 }
 
 template<typename Dtype>
-Params<Dtype>::Params(shared_ptr<Solver<Dtype> > root_solver)
+Params<Dtype>::Params(std::shared_ptr<Solver<Dtype> > root_solver)
   : size_(total_size<Dtype>(root_solver->net()->learnable_params())),
     data_(),
     diff_() {
 }
 
 template<typename Dtype>
-GPUParams<Dtype>::GPUParams(shared_ptr<Solver<Dtype> > root_solver, int device)
+GPUParams<Dtype>::GPUParams(std::shared_ptr<Solver<Dtype> > root_solver, int device)
   : Params<Dtype>(root_solver) {
   int initial_device;
   CUDA_CHECK(cudaGetDevice(&initial_device));
@@ -114,7 +114,7 @@ static int getDevice() {
 }
 
 template<typename Dtype>
-NCCL<Dtype>::NCCL(shared_ptr<Solver<Dtype> > solver)
+NCCL<Dtype>::NCCL(std::shared_ptr<Solver<Dtype> > solver)
   : GPUParams<Dtype>(solver, getDevice()),
     comm_(), solver_(solver), barrier_() {
   this->Configure(solver.get());
@@ -122,7 +122,7 @@ NCCL<Dtype>::NCCL(shared_ptr<Solver<Dtype> > solver)
 }
 
 template<typename Dtype>
-NCCL<Dtype>::NCCL(shared_ptr<Solver<Dtype> > solver, const string& uid)
+NCCL<Dtype>::NCCL(std::shared_ptr<Solver<Dtype> > solver, const string& uid)
   : GPUParams<Dtype>(solver, getDevice()),
     solver_(solver), barrier_() {
   this->Configure(solver.get());
@@ -201,7 +201,7 @@ void NCCL<Dtype>::Broadcast() {
 template<typename Dtype>
 void NCCL<Dtype>::run(int layer) {
   CHECK(solver_->param().layer_wise_reduce());
-  vector<shared_ptr<Blob<Dtype> > >& blobs =
+  vector<std::shared_ptr<Blob<Dtype> > >& blobs =
     solver_->net()->layers()[layer]->blobs();
 #ifdef DEBUG
   // Assert blobs are contiguous to reduce in one step (e.g. bias often small)
@@ -258,7 +258,7 @@ void NCCL<Dtype>::on_gradients_ready() {
 template<typename Dtype>
 class Worker : public InternalThread {
  public:
-  explicit Worker(shared_ptr<Solver<Dtype> > rank0, int device,
+  explicit Worker(std::shared_ptr<Solver<Dtype> > rank0, int device,
                   boost::barrier* barrier, vector<NCCL<Dtype>*>* nccls,
                   const char* restore)
     : rank0_(rank0), device_(device), barrier_(barrier),
@@ -277,7 +277,7 @@ class Worker : public InternalThread {
     CHECK_EQ(device, device_);
 #endif
     param.set_type(rank0_->type());
-    shared_ptr<Solver<Dtype> > s(SolverRegistry<Dtype>::CreateSolver(param));
+    std::shared_ptr<Solver<Dtype> > s(SolverRegistry<Dtype>::CreateSolver(param));
     CHECK_EQ(s->type(), rank0_->type());
     if (restore_) {
       // Could not make NCCL broadcast solver state, it seems to crash
@@ -317,7 +317,7 @@ class Worker : public InternalThread {
 #endif
   }
 
-  shared_ptr<Solver<Dtype> > rank0_;
+  std::shared_ptr<Solver<Dtype> > rank0_;
   int device_;
   boost::barrier* barrier_;
   vector<NCCL<Dtype>*>* nccls_;
@@ -329,7 +329,7 @@ void NCCL<Dtype>::Run(const vector<int>& gpus, const char* restore) {
   boost::barrier barrier(static_cast<int>(gpus.size()));
   vector<NCCL<Dtype>*> nccls(gpus.size());
   // Create workers
-  vector<shared_ptr<Worker<Dtype> > > workers(gpus.size());
+  vector<std::shared_ptr<Worker<Dtype> > > workers(gpus.size());
   for (int i = 1; i < gpus.size(); ++i) {
     CUDA_CHECK(cudaSetDevice(gpus[i]));
     Caffe::set_solver_rank(i);

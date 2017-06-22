@@ -51,7 +51,7 @@ TYPED_TEST(InnerProductLayerTest, TestSetUp) {
   InnerProductParameter* inner_product_param =
       layer_param.mutable_inner_product_param();
   inner_product_param->set_num_output(10);
-  shared_ptr<InnerProductLayer<Dtype> > layer(
+  std::shared_ptr<InnerProductLayer<Dtype> > layer(
       new InnerProductLayer<Dtype>(layer_param));
   layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
   EXPECT_EQ(this->blob_top_->num(), 2);
@@ -70,7 +70,7 @@ TYPED_TEST(InnerProductLayerTest, TestSetUpTransposeFalse) {
       layer_param.mutable_inner_product_param();
   inner_product_param->set_num_output(10);
   inner_product_param->set_transpose(false);
-  shared_ptr<InnerProductLayer<Dtype> > layer(
+  std::shared_ptr<InnerProductLayer<Dtype> > layer(
       new InnerProductLayer<Dtype>(layer_param));
   layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
   EXPECT_EQ(2, this->blob_top_->num());
@@ -92,7 +92,7 @@ TYPED_TEST(InnerProductLayerTest, TestSetUpTransposeTrue) {
       layer_param.mutable_inner_product_param();
   inner_product_param->set_num_output(10);
   inner_product_param->set_transpose(true);
-  shared_ptr<InnerProductLayer<Dtype> > layer(
+  std::shared_ptr<InnerProductLayer<Dtype> > layer(
       new InnerProductLayer<Dtype>(layer_param));
   layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
   EXPECT_EQ(2, this->blob_top_->num());
@@ -121,7 +121,7 @@ TYPED_TEST(InnerProductLayerTest, TestForward) {
     inner_product_param->mutable_bias_filler()->set_type("uniform");
     inner_product_param->mutable_bias_filler()->set_min(1);
     inner_product_param->mutable_bias_filler()->set_max(2);
-    shared_ptr<InnerProductLayer<Dtype> > layer(
+    std::shared_ptr<InnerProductLayer<Dtype> > layer(
         new InnerProductLayer<Dtype>(layer_param));
     layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
     layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
@@ -160,7 +160,7 @@ TYPED_TEST(InnerProductLayerTest, TestForwardTranspose) {
     inner_product_param->mutable_bias_filler()->set_min(1);
     inner_product_param->mutable_bias_filler()->set_max(2);
     inner_product_param->set_transpose(false);
-    shared_ptr<InnerProductLayer<Dtype> > layer(
+    std::shared_ptr<InnerProductLayer<Dtype> > layer(
         new InnerProductLayer<Dtype>(layer_param));
     layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
     layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
@@ -171,7 +171,7 @@ TYPED_TEST(InnerProductLayerTest, TestForwardTranspose) {
     this->blob_top_vec_.clear();
     this->blob_top_vec_.push_back(new Blob<Dtype>());
     inner_product_param->set_transpose(true);
-    shared_ptr<InnerProductLayer<Dtype> > ip_t(
+    std::shared_ptr<InnerProductLayer<Dtype> > ip_t(
         new InnerProductLayer<Dtype>(layer_param));
     ip_t->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
     const int count_w = layer->blobs()[0]->count();
@@ -225,7 +225,7 @@ TYPED_TEST(InnerProductLayerTest, TestForwardNoBatch) {
     inner_product_param->mutable_bias_filler()->set_type("uniform");
     inner_product_param->mutable_bias_filler()->set_min(1);
     inner_product_param->mutable_bias_filler()->set_max(2);
-    shared_ptr<InnerProductLayer<Dtype> > layer(
+    std::shared_ptr<InnerProductLayer<Dtype> > layer(
         new InnerProductLayer<Dtype>(layer_param));
     layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
     layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
@@ -310,7 +310,7 @@ TYPED_TEST(InnerProductLayerTest, TestBackwardTranspose) {
     inner_product_param->mutable_bias_filler()->set_min(1);
     inner_product_param->mutable_bias_filler()->set_max(2);
     inner_product_param->set_transpose(false);
-    shared_ptr<InnerProductLayer<Dtype> > layer(
+    std::shared_ptr<InnerProductLayer<Dtype> > layer(
         new InnerProductLayer<Dtype>(layer_param));
     layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
     layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
@@ -343,7 +343,7 @@ TYPED_TEST(InnerProductLayerTest, TestBackwardTranspose) {
     this->blob_top_vec_.clear();
     this->blob_top_vec_.push_back(new Blob<Dtype>());
     inner_product_param->set_transpose(true);
-    shared_ptr<InnerProductLayer<Dtype> > ip_t(
+    std::shared_ptr<InnerProductLayer<Dtype> > ip_t(
         new InnerProductLayer<Dtype>(layer_param));
     ip_t->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
     // manually copy and transpose the weights from 1st IP layer into 2nd

@@ -74,7 +74,7 @@ TYPED_TEST(ScaleLayerTest, TestForwardEltwise) {
   this->blob_bottom_vec_.push_back(this->blob_bottom_eltwise_);
   LayerParameter layer_param;
   layer_param.mutable_scale_param()->set_axis(0);
-  shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
+  std::shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
   layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
   ASSERT_EQ(this->blob_bottom_->shape(), this->blob_top_->shape());
   layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
@@ -95,7 +95,7 @@ TYPED_TEST(ScaleLayerTest, TestForwardEltwiseInPlace) {
   this->blob_bottom_vec_.push_back(this->blob_bottom_eltwise_);
   LayerParameter layer_param;
   layer_param.mutable_scale_param()->set_axis(0);
-  shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
+  std::shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
   layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
   layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
   const Dtype* data = this->blob_bottom_->cpu_data();
@@ -114,7 +114,7 @@ TYPED_TEST(ScaleLayerTest, TestBackwardEltwiseInPlace) {
   this->blob_bottom_vec_.push_back(this->blob_bottom_eltwise_);
   LayerParameter layer_param;
   layer_param.mutable_scale_param()->set_axis(0);
-  shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
+  std::shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
   Blob<Dtype> top_diff(this->blob_bottom_->shape());
   FillerParameter filler_param;
   filler_param.set_type("gaussian");
@@ -160,7 +160,7 @@ TYPED_TEST(ScaleLayerTest, TestForwardEltwiseWithParam) {
   scale_param->set_axis(0);
   scale_param->set_num_axes(-1);
   scale_param->mutable_filler()->set_type("gaussian");
-  shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
+  std::shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
   layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
   ASSERT_EQ(this->blob_bottom_->shape(), this->blob_top_->shape());
   layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
@@ -178,7 +178,7 @@ TYPED_TEST(ScaleLayerTest, TestForwardBroadcastBegin) {
   this->blob_bottom_vec_.push_back(this->blob_bottom_broadcast_0_);
   LayerParameter layer_param;
   layer_param.mutable_scale_param()->set_axis(0);
-  shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
+  std::shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
   layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
   ASSERT_EQ(this->blob_bottom_->shape(), this->blob_top_->shape());
   layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
@@ -201,7 +201,7 @@ TYPED_TEST(ScaleLayerTest, TestForwardBroadcastMiddle) {
   this->blob_bottom_vec_.push_back(this->blob_bottom_broadcast_1_);
   LayerParameter layer_param;
   layer_param.mutable_scale_param()->set_axis(1);
-  shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
+  std::shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
   layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
   ASSERT_EQ(this->blob_bottom_->shape(), this->blob_top_->shape());
   layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
@@ -227,7 +227,7 @@ TYPED_TEST(ScaleLayerTest, TestForwardBroadcastMiddleInPlace) {
   this->blob_bottom_vec_.push_back(this->blob_bottom_broadcast_1_);
   LayerParameter layer_param;
   layer_param.mutable_scale_param()->set_axis(1);
-  shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
+  std::shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
   layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
   layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
   for (int n = 0; n < this->blob_bottom_->num(); ++n) {
@@ -251,7 +251,7 @@ TYPED_TEST(ScaleLayerTest, TestBackwardBroadcastMiddleInPlace) {
   this->blob_bottom_vec_.push_back(this->blob_bottom_broadcast_1_);
   LayerParameter layer_param;
   layer_param.mutable_scale_param()->set_axis(1);
-  shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
+  std::shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
   Blob<Dtype> top_diff(this->blob_bottom_->shape());
   FillerParameter filler_param;
   filler_param.set_type("gaussian");
@@ -297,7 +297,7 @@ TYPED_TEST(ScaleLayerTest, TestForwardBroadcastMiddleWithParam) {
   scale_param->set_axis(1);
   scale_param->set_num_axes(2);
   scale_param->mutable_filler()->set_type("gaussian");
-  shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
+  std::shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
   layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
   ASSERT_EQ(this->blob_bottom_->shape(), this->blob_top_->shape());
   layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
@@ -323,7 +323,7 @@ TYPED_TEST(ScaleLayerTest, TestForwardBroadcastMiddleWithParamAndBias) {
   scale_param->mutable_filler()->set_type("gaussian");
   scale_param->set_bias_term(true);
   scale_param->mutable_bias_filler()->set_type("gaussian");
-  shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
+  std::shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
   layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
   ASSERT_EQ(this->blob_bottom_->shape(), this->blob_top_->shape());
   layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
@@ -346,7 +346,7 @@ TYPED_TEST(ScaleLayerTest, TestForwardBroadcastEnd) {
   this->blob_bottom_vec_.push_back(this->blob_bottom_broadcast_2_);
   LayerParameter layer_param;
   layer_param.mutable_scale_param()->set_axis(2);
-  shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
+  std::shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
   layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
   ASSERT_EQ(this->blob_bottom_->shape(), this->blob_top_->shape());
   layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
@@ -368,7 +368,7 @@ TYPED_TEST(ScaleLayerTest, TestForwardScale) {
   typedef typename TypeParam::Dtype Dtype;
   this->blob_bottom_vec_.push_back(this->blob_bottom_scale_);
   LayerParameter layer_param;
-  shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
+  std::shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
   layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
   ASSERT_EQ(this->blob_bottom_->shape(), this->blob_top_->shape());
   layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
@@ -386,7 +386,7 @@ TYPED_TEST(ScaleLayerTest, TestForwardScaleAxis2) {
   this->blob_bottom_vec_.push_back(this->blob_bottom_scale_);
   LayerParameter layer_param;
   layer_param.mutable_scale_param()->set_axis(2);
-  shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
+  std::shared_ptr<ScaleLayer<Dtype> > layer(new ScaleLayer<Dtype>(layer_param));
   layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
   ASSERT_EQ(this->blob_bottom_->shape(), this->blob_top_->shape());
   layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);

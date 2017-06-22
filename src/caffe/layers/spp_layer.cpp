@@ -89,7 +89,7 @@ void SPPLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom,
     // pooling layer setup
     LayerParameter pooling_param = GetPoolingParam(0, bottom_h_, bottom_w_,
         spp_param);
-    pooling_layers_.push_back(shared_ptr<PoolingLayer<Dtype> > (
+    pooling_layers_.push_back(std::shared_ptr<PoolingLayer<Dtype> > (
         new PoolingLayer<Dtype>(pooling_param)));
     pooling_layers_[0]->SetUp(bottom, top);
     return;
@@ -118,7 +118,7 @@ void SPPLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom,
     LayerParameter pooling_param = GetPoolingParam(
         i, bottom_h_, bottom_w_, spp_param);
 
-    pooling_layers_.push_back(shared_ptr<PoolingLayer<Dtype> > (
+    pooling_layers_.push_back(std::shared_ptr<PoolingLayer<Dtype> > (
         new PoolingLayer<Dtype>(pooling_param)));
     pooling_layers_[i]->SetUp(*pooling_bottom_vecs_[i], *pooling_top_vecs_[i]);
 

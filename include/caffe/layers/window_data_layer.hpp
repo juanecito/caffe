@@ -38,7 +38,7 @@ class WindowDataLayer : public BasePrefetchingDataLayer<Dtype> {
   virtual unsigned int PrefetchRand();
   virtual void load_batch(Batch<Dtype>* batch);
 
-  shared_ptr<Caffe::RNG> prefetch_rng_;
+  std::shared_ptr<Caffe::RNG> prefetch_rng_;
   vector<std::pair<std::string, vector<int> > > image_database_;
   enum WindowField { IMAGE_INDEX, LABEL, OVERLAP, X1, Y1, X2, Y2, NUM };
   vector<vector<float> > fg_windows_;
