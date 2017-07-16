@@ -9,7 +9,7 @@ cd $DIR
 mkdir -p ./build
 cd ./build
 cmake ../
-make
+make -j 20
 cd ..
 
 
