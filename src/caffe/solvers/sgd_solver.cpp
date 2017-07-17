@@ -116,6 +116,23 @@ void SGDSolver<Dtype>::ApplyUpdate() {
 }
 
 template <typename Dtype>
+virtual void SGDSolver<Dtype>::ApplyUpdateFromTo(int start, int end) {
+	Dtype rate = GetLearningRate();
+	if (this->param_.display() && this->iter_ % this->param_.display() == 0) {
+		LOG_IF(INFO, Caffe::root_solver()) << "Iteration " << this->iter_
+				<< ", lr = " << rate;
+	}
+	ClipGradients();
+	for (int param_id = 0; param_id < this->net_->learnable_params().size();
+			++param_id) {
+		Normalize(param_id);
+		Regularize(param_id);
+		ComputeUpdateValue(param_id, rate);
+	}
+	this->net_->Update();
+}
+
+template <typename Dtype>
 void SGDSolver<Dtype>::Normalize(int param_id) {
   if (this->param_.iter_size() == 1) { return; }
   // Scale gradient to counterbalance accumulation.

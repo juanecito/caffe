@@ -97,11 +97,14 @@ class Solver {
    */
   virtual inline const char* type() const { return ""; }
 
-
- protected:
-
+  // juanecito
   // Make and apply the update value for the current iteration.
   virtual void ApplyUpdate() = 0;
+  virtual void ApplyUpdateFromTo(int start, int end) = 0;
+  // juanecito
+ protected:
+
+
   string SnapshotFilename(const string extension);
   string SnapshotToBinaryProto();
   string SnapshotToHDF5();
