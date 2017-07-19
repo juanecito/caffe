@@ -137,6 +137,12 @@ class Solver {
   Timer iteration_timer_;
   float iterations_last_;
 
+
+  // juanecito
+	std::map<int, std::vector<int> > layerid_learnable_params_ids_;
+  // juanecito
+
+
   DISABLE_COPY_AND_ASSIGN(Solver);
 };
 
