@@ -57,7 +57,9 @@ class Solver {
   virtual void Solve(const char* resume_file = NULL);
   inline void Solve(const string resume_file) { Solve(resume_file.c_str()); }
   void Step(int iters);
-  void StepOne_BackAndUpdate();
+
+  void StepOne_ForBackAndUpdate(void);
+  void StepOne_BackAndUpdate(void);
 
 
   // The Restore method simply dispatches to one of the
