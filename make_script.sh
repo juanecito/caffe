@@ -24,5 +24,16 @@ cmake -D CMAKE_C_COMPILER=/usr/bin/gcc-5 -D CMAKE_CXX_COMPILER=/usr/bin/g++-5 ${
 make -j 4
 cd ..
 
+mkdir -p ./build_d_cudnn
+cd ./build_d
+cmake -D CMAKE_C_COMPILER=/usr/bin/gcc-5 -D CMAKE_CXX_COMPILER=/usr/bin/g++-5 ${BUILD_DEBUG} ../
+make -j 4
+
+cd ..
+mkdir -p ./build_r_cudnn
+cd ./build_r
+cmake -D CMAKE_C_COMPILER=/usr/bin/gcc-5 -D CMAKE_CXX_COMPILER=/usr/bin/g++-5 ${BUILD_RELEASE} ../
+make -j 4
+cd ..
 
 exit 0
