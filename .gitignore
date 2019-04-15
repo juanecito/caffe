@@ -99,3 +99,5 @@ CURRENT
 MANIFEST-*
 /build_d/
 /build_r/
+/build_d_cudnn/
+/build_r_cudnn/

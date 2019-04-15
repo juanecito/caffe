@@ -80,11 +80,11 @@ class SwishLayer : public NeuronLayer<Dtype> {
       const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
 
   /// The internal SigmoidLayer
-  shared_ptr<SigmoidLayer<Dtype> > sigmoid_layer_;
+  std::shared_ptr<SigmoidLayer<Dtype> > sigmoid_layer_;
   /// sigmoid_input_ stores the input of the SigmoidLayer.
-  shared_ptr<Blob<Dtype> > sigmoid_input_;
+  std::shared_ptr<Blob<Dtype> > sigmoid_input_;
   /// sigmoid_output_ stores the output of the SigmoidLayer.
-  shared_ptr<Blob<Dtype> > sigmoid_output_;
+  std::shared_ptr<Blob<Dtype> > sigmoid_output_;
   /// bottom vector holder to call the underlying SigmoidLayer::Forward
   vector<Blob<Dtype>*> sigmoid_bottom_vec_;
   /// top vector holder to call the underlying SigmoidLayer::Forward

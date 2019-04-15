@@ -78,7 +78,7 @@ REGISTER_LAYER_CREATOR(Convolution, GetConvolutionLayer);
 
 // Get deconvolution layer according to engine.
 template <typename Dtype>
-shared_ptr<Layer<Dtype> > GetDeconvolutionLayer(const LayerParameter& param) {
+std::shared_ptr<Layer<Dtype> > GetDeconvolutionLayer(const LayerParameter& param) {
   ConvolutionParameter conv_param = param.convolution_param();
   ConvolutionParameter_Engine engine = conv_param.engine();
 #ifdef USE_CUDNN
@@ -98,14 +98,14 @@ shared_ptr<Layer<Dtype> > GetDeconvolutionLayer(const LayerParameter& param) {
 #endif
   }
   if (engine == ConvolutionParameter_Engine_CAFFE) {
-    return shared_ptr<Layer<Dtype> >(new DeconvolutionLayer<Dtype>(param));
+    return std::shared_ptr<Layer<Dtype> >(new DeconvolutionLayer<Dtype>(param));
 #ifdef USE_CUDNN
   } else if (engine == ConvolutionParameter_Engine_CUDNN) {
     if (use_dilation) {
       LOG(FATAL) << "CuDNN doesn't support the dilated deconvolution at Layer "
                  << param.name();
     }
-    return shared_ptr<Layer<Dtype> >(new CuDNNDeconvolutionLayer<Dtype>(param));
+    return std::shared_ptr<Layer<Dtype> >(new CuDNNDeconvolutionLayer<Dtype>(param));
 #endif
   } else {
     LOG(FATAL) << "Layer " << param.name() << " has unknown engine.";

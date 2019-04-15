@@ -528,7 +528,7 @@ class BilinearFillerTest : public ::testing::Test {
   virtual ~BilinearFillerTest() { delete blob_; }
   Blob<Dtype>* blob_;
   FillerParameter filler_param_;
-  shared_ptr<BilinearFiller<Dtype> > filler_;
+  std::shared_ptr<BilinearFiller<Dtype> > filler_;
 };
 
 TYPED_TEST_CASE(BilinearFillerTest, TestDtypes);

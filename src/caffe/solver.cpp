@@ -86,7 +86,7 @@ void Solver<Dtype>::Init(const SolverParameter& param) {
 // Load weights from the caffemodel(s) specified in "weights" solver parameter
 // into the train and test nets.
 template <typename Dtype>
-void LoadNetWeights(shared_ptr<Net<Dtype> > net,
+void LoadNetWeights(std::shared_ptr<Net<Dtype> > net,
     const std::string& model_list) {
   std::vector<std::string> model_names;
   boost::split(model_names, model_list, boost::is_any_of(","));
