@@ -21,7 +21,7 @@ class SGDSolver : public Solver<Dtype> {
       : Solver<Dtype>(param_file) { PreSolve(); }
   virtual inline const char* type() const { return "SGD"; }
 
-  const vector<std::shared_ptr<Blob<Dtype> > >& history() { return history_; }
+  const vector<shared_ptr<Blob<Dtype> > >& history() { return history_; }
 
   virtual void ApplyUpdate();
   Dtype GetLearningRate();

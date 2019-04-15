@@ -517,8 +517,8 @@ BOOST_PYTHON_MODULE(_caffe) {
   bp::class_<SGDSolver<Dtype>, bp::bases<Solver<Dtype> >,
     std::shared_ptr<SGDSolver<Dtype> >, boost::noncopyable>(
         "SGDSolver", bp::init<string>())
-        .add_property("lr", &SGDSolver<Dtype>::GetLearningRate);
-  bp::class_<NesterovSolver<Dtype>, bp::bases<SGDSolver<Dtype> >,
+       .add_property("lr", &SGDSolver<Dtype>::GetLearningRate);
+  bp::class_<NesterovSolver<Dtype>, bp::bases<Solver<Dtype> >,
     std::shared_ptr<NesterovSolver<Dtype> >, boost::noncopyable>(
         "NesterovSolver", bp::init<string>());
   bp::class_<AdaGradSolver<Dtype>, bp::bases<SGDSolver<Dtype> >,
