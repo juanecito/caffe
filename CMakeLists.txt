@@ -123,3 +123,5 @@ caffe_print_configuration_summary()
 # ---[ Export configs generation
 caffe_generate_export_configs()
 
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -Wall")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall")

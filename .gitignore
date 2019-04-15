@@ -97,3 +97,5 @@ LOCK
 LOG*
 CURRENT
 MANIFEST-*
+/build_d/
+/build_r/

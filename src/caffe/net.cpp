@@ -924,6 +924,24 @@ void Net<Dtype>::Update() {
 }
 
 template <typename Dtype>
+void Net<Dtype>::Update(int start, int end,
+		const std::map<int, std::vector<int> >& layerid_learnable_params_ids) {
+
+	  for (int layer_id = start; layer_id < end; layer_id++)
+	  {
+		  auto it_layerid_learnable_params_ids = layerid_learnable_params_ids.find(layer_id);
+
+		  if (it_layerid_learnable_params_ids != layerid_learnable_params_ids.end())
+		  {
+			  for (auto it_param_id : layerid_learnable_params_ids.at(layer_id))
+			  {
+				  learnable_params_[it_param_id]->Update();
+			  }
+		  }
+	  }
+}
+
+template <typename Dtype>
 void Net<Dtype>::ClearParamDiffs() {
   for (int i = 0; i < learnable_params_.size(); ++i) {
     Blob<Dtype>* blob = learnable_params_[i];

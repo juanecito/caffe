@@ -91,6 +91,11 @@ class Net {
 
   /// @brief Updates the network weights based on the diff values computed.
   void Update();
+
+  void Update(int start, int end,
+	const std::map<int, std::vector<int> >& layerid_learnable_params_ids);
+
+
   /**
    * @brief Shares weight data of owner blobs with shared blobs.
    *
@@ -190,6 +195,17 @@ class Net {
   const map<string, int>& param_names_index() const {
     return param_names_index_;
   }
+
+  //juanecito
+  const vector<pair<int,int> >& param_layer_indices() const {
+	  return this->param_layer_indices_;
+  }
+
+  const vector<int>& learnable_param_ids() const {
+	  return this->learnable_param_ids_;
+  }
+  //juanecito
+
   inline const vector<int>& param_owners() const { return param_owners_; }
   inline const vector<string>& param_display_names() const {
     return param_display_names_;

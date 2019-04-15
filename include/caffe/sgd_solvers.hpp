@@ -21,17 +21,23 @@ class SGDSolver : public Solver<Dtype> {
       : Solver<Dtype>(param_file) { PreSolve(); }
   virtual inline const char* type() const { return "SGD"; }
 
-  const vector<shared_ptr<Blob<Dtype> > >& history() { return history_; }
+  const vector<std::shared_ptr<Blob<Dtype> > >& history() { return history_; }
+
+  // juanecito
+  virtual void ApplyUpdateFromTo(int start, int end);
 
   virtual void ApplyUpdate();
   Dtype GetLearningRate();
 
- protected:
-  void PreSolve();
   virtual void Normalize(int param_id);
   virtual void Regularize(int param_id);
   virtual void ComputeUpdateValue(int param_id, Dtype rate);
   virtual void ClipGradients();
+  virtual void ClipGradients(int start, int end);
+  // juanecito
+
+ protected:
+  void PreSolve();
   virtual void SnapshotSolverState(const string& model_filename);
   virtual void SnapshotSolverStateToBinaryProto(const string& model_filename);
   virtual void SnapshotSolverStateToHDF5(const string& model_filename);
