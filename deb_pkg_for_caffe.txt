@@ -1,0 +1,8 @@
+libhdf5-dev:amd64 libhdf4-0:amd64 libmatheval1:amd64 hdf5-helpers:amd64 libhdf5-cpp-100:amd64 libaec-dev:amd64 h5utils:amd64 hdf5-tools:amd64
+libgoogle-glog0v5:amd64, libgoogle-glog-dev:amd64 libgflags-dev:amd64, libgflags2v5:amd64
+liblmdb-dev:amd64, liblmdb0:amd64, lmdb-doc:amd64 libleveldb-dev:amd64, libleveldb1v5:amd64 libsnappy-dev:amd64
+libatlas-cpp-0.6-tools:amd64 libatlas-cpp-0.6-dev:amd64 libatlas-cpp-0.6-2:amd64 libatlas3-base:amd64 gfortran:amd64 gfortran-6:amd64 libgfortran-6-dev:amd64 libblas-dev:amd64 libatlas-dev:amd64
+liblapack-dev:amd64 libclblas2:amd64 libclblas-dev:amd64 libatlas-base-dev:amd64
+
+
+dpkg -i libcudnn7-dev_7.1.4.18-1+cuda8.0_amd64.deb libcudnn7-doc_7.1.4.18-1+cuda8.0_amd64.deb libcudnn7_7.1.4.18-1+cuda8.0_amd64.deb

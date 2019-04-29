@@ -316,7 +316,7 @@ class Layer {
   virtual void Forward_gpu(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top) {
     // LOG(WARNING) << "Using CPU code as backup.";
-    Forward_cpu(bottom, top);
+    return Forward_cpu(bottom, top);
   }
 
   /**
