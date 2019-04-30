@@ -12,27 +12,29 @@ cd $DIR
 BUILD_DEBUG="-DCMAKE_BUILD_TYPE=Debug"
 BUILD_RELEASE="-DCMAKE_BUILD_TYPE=Release"
 
+CMAKE_COMMON_FLAGS="-DCMAKE_C_COMPILER=/usr/bin/gcc-5 -DCMAKE_CXX_COMPILER=/usr/bin/g++-5 -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCUDA_USE_STATIC_CUDA_RUNTIME=OFF"
+
 mkdir -p ./build_d
 cd ./build_d
-cmake -D CMAKE_C_COMPILER=/usr/bin/gcc-5 -D CMAKE_CXX_COMPILER=/usr/bin/g++-5 ${BUILD_DEBUG} -DUSE_CUDNN=OFF -DCUDA_USE_STATIC_CUDA_RUNTIME=OFF ../
+cmake ${CMAKE_COMMON_FLAGS} ${BUILD_DEBUG} -DUSE_CUDNN=OFF ../
 make -j12
 
 cd ..
 mkdir -p ./build_r
 cd ./build_r
-cmake -D CMAKE_C_COMPILER=/usr/bin/gcc-5 -D CMAKE_CXX_COMPILER=/usr/bin/g++-5 ${BUILD_RELEASE} -DUSE_CUDNN=OFF -DCUDA_USE_STATIC_CUDA_RUNTIME=OFF  ../
+cmake ${CMAKE_COMMON_FLAGS} ${BUILD_RELEASE} -DUSE_CUDNN=OFF ../
 make -j12
 cd ..
 
 mkdir -p ./build_d_cudnn
 cd ./build_d_cudnn
-cmake -D CMAKE_C_COMPILER=/usr/bin/gcc-5 -D CMAKE_CXX_COMPILER=/usr/bin/g++-5 ${BUILD_DEBUG} -DUSE_CUDNN=ON -DCUDA_USE_STATIC_CUDA_RUNTIME=OFF  ../
+cmake ${CMAKE_COMMON_FLAGS} ${BUILD_DEBUG} -DUSE_CUDNN=ON ../
 make -j12
 
 cd ..
 mkdir -p ./build_r_cudnn
 cd ./build_r_cudnn
-cmake -D CMAKE_C_COMPILER=/usr/bin/gcc-5 -D CMAKE_CXX_COMPILER=/usr/bin/g++-5 ${BUILD_RELEASE} -DUSE_CUDNN=ON -DCUDA_USE_STATIC_CUDA_RUNTIME=OFF  ../
+cmake ${CMAKE_COMMON_FLAGS} ${BUILD_RELEASE} -DUSE_CUDNN=ON ../
 make -j12 
 cd ..
 
